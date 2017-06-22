@@ -133,6 +133,8 @@ class MainWindow(QWidget):
 		self.int_to_key = input_file_data['itk']
 		self.key_to_int = input_file_data['kti']
 
+		self.best_recommend == None
+
 		self.drawUI()
 
 	def drawUI(self):
@@ -161,19 +163,6 @@ class MainWindow(QWidget):
 			{background-color: #fff;}
 			""")
 		self.time_line.sliderReleased.connect(self.changeTime)
-
-		
-		"""self.current_time_left = QLabel(self)
-		self.current_time_left.setText("0:27")
-		self.current_time_left.setStyleSheet("border-image: rgba(0, 0, 0, 0); color: rgba(255, 255, 255); font-size: 11pt; font-weight: 200;")
-		self.current_time_left.resize(30, 12)
-		self.current_time_left.move(40, 145)
-
-		self.current_time_right = QLabel(self)
-		self.current_time_right.setText("-1:27")
-		self.current_time_right.setStyleSheet("border-image: rgba(0, 0, 0, 0); color: rgba(255, 255, 255); font-size: 11pt; font-weight: 200;")
-		self.current_time_right.resize(30, 12)
-		self.current_time_right.move(250, 145)"""
 
 		self.rewind = RewindBtn(self)
 		self.rewind.move(50, 175)
@@ -212,13 +201,13 @@ class MainWindow(QWidget):
 		did_name = s.name
 		did_album = s.album
 		did_artist = s.artist
-		if s.name = "":
+		if s.name == "":
 			did_name = "None"
-		if s.album = "":
+		if s.album == "":
 			did_album = "None"
-		if s.artist = "":
+		if s.artist == "":
 			did_artist = "None"
-		DID = "-".join([did_name[:5], did_album[:5], did_artist[:5]])#self.iTunes.current_track.database_id
+		DID = "-".join([str(did_name)[:5], str(did_album)[:5], str(did_artist)[:5]])#self.iTunes.current_track.database_id
 		cTrackDuration = self.iTunes.current_track.duration
 		playerPosition = self.iTunes.player_position
 		self.time_line.setValue(playerPosition)
@@ -254,7 +243,10 @@ class MainWindow(QWidget):
 			if playerPosition <= cTrackDuration and playerPosition >= cTrackDuration-2:
 				if self.song_changing == False:
 					self.iTunes.pause()
-					self.iTunes.play(self.best_recommend)
+					if self.best_recommend == None:
+						self.iTunes.play()
+					else:
+						self.iTunes.play(self.best_recommend)
 					self.song_changing = True
 				return
 
