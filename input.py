@@ -12,6 +12,7 @@ count = 0
 itl_song_keys = list(itl.songs.keys())
 #print(itl_song_keys)
 for key, value in songf.items():
+	count = 0
 	while count < len(itl_song_keys):
 		if int(itl_song_keys[count]) == int(key):
 			song_list.append((int(key), str(itl.songs[int(key)].album)))
@@ -49,5 +50,5 @@ for key, album in song_list:
 		partitioned_list[count].append(key_to_int[key])
 		lastAlbum = album
 
-print(partitioned_list)
+#print(partitioned_list)
 pickle.dump({'itk': int_to_key, 'kti': key_to_int, 'ixx': partitioned_list}, open('input.p', 'wb'), protocol=2)
