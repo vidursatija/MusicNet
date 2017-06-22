@@ -1,8 +1,10 @@
 # MusicNet (Python3)
-Improved shuffle for iTunes
+#### Improved shuffle for iTunes
+This app recognizes your pattern of listening music using recurrent neural networks and generates better shuffle predictions.
+You have to run the app while iTunes is on.
 
 ## Setup
-Open music_analyze.py and write the path of your iTunes XML directory
+Open music_analyze.py and update the path of your iTunes XML directory at line 67
 ```
 xmlPath = '/Users/<username>/Music/iTunes/iTunes Music Library.xml'
 ```
