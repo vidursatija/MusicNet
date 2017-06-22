@@ -6,7 +6,7 @@ You have to run the app while iTunes is on.
 ## Install Dependencies
 ```
 pip install -r requirements.txt
-pip Install git+https://github.com/PhilipTrauner/iTunesConnector.git
+pip install git+https://github.com/PhilipTrauner/iTunesConnector.git
 pip install git+https://github.com/liamks/libpytunes.git
 ```
 
