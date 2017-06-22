@@ -7,6 +7,7 @@ Install by:
 ```
 python3 music_analyze.py
 python3 input.py
+python3 model.py
 ```
 This might take some time to analyze and setup. (6 hours ~ 600 songs)
 
