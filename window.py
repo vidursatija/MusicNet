@@ -275,11 +275,11 @@ class MainWindow(QWidget):
 					print("Not a known song")
 					print(DID)
 					goodSong = False
-			if goodSong:
-				self.top3 = self.pm.predictNext(self.song_queue+[DID, DID])
-			else:
-				return
-			#print(self.top3)
+				if goodSong:
+					self.top3 = self.pm.predictNext(self.song_queue+[DID, DID])
+				else:
+					return
+			print(self.top3)
 			#SEARCH NAME AND ALBUM AND ARTIST in itl
 			self.best_recommend = None
 			for index, top in enumerate(self.top3):
