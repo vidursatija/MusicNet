@@ -9,6 +9,7 @@ python3 music_analyze.py
 python3 input.py
 ```
 This might take some time to analyze and setup. (6 hours ~ 600 songs)
+
 For best performance ensure your iTunes library has sorted albums
 
 ## Usage
@@ -17,9 +18,9 @@ python3 window.py
 ```
 
 ## Requirements
-tensorflow (requirements.txt)
-numpy (requirements.txt)
-iTunesConnector (https://github.com/PhilipTrauner/iTunesConnector)
-PyQt5 (requirements.txt)
-Librosa (requirements.txt)
-libpytunes (https://github.com/liamks/libpytunes)
+1. tensorflow (requirements.txt)
+2. numpy (requirements.txt)
+3. iTunesConnector (https://github.com/PhilipTrauner/iTunesConnector)
+4. PyQt5 (requirements.txt)
+5. Librosa (requirements.txt)
+6. libpytunes (https://github.com/liamks/libpytunes)
