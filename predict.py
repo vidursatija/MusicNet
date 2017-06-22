@@ -61,7 +61,4 @@ class PredictModel():
 		top3 = probs[0].argsort()[-3:][::-1]
 		return [self.int_to_key[int(top)] for top in top3]
 
-if __name__ == '__main__':
-	m = PredictModel()
-	print(m.predictNext([-1, 1208, 1210]))
 
