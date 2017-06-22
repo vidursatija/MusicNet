@@ -23,7 +23,7 @@ int_to_features = np.empty((len(all_features)+1, 240))
 int_to_features[0] = np.zeros((240))
 
 for key, feature in all_features.items():
-	int_to_features[key_to_int[int(key)]] = feature
+	int_to_features[key_to_int[key]] = feature
 
 hidden_size = 240
 vocab_size = len(all_features) + 1

@@ -8,13 +8,14 @@ songf = pickle.load(open("songsf.p", 'rb'))
 
 song_list = []
 count = 0
-itl_song_keys = list(itl.songs.keys())
+itl_song_values = list(itl.songs.values())
 #print(itl_song_keys)
 for key, value in songf.items():
 	count = 0
 	while count < len(itl_song_keys):
-		if int(itl_song_keys[count]) == int(key):
-			song_list.append((int(key), str(itl.songs[int(key)].album)))
+		song = itl_song_values[count]
+		if "-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]]) == key:
+			song_list.append(key, str(song.album))
 			count += 1
 			break
 		else:
@@ -23,10 +24,10 @@ for key, value in songf.items():
 song_list = sorted(song_list, key=lambda x: x[1])
 
 int_to_key = list()
-int_to_key.append(-1)
+int_to_key.append('-1')
 
 key_to_int = dict()
-key_to_int[-1] = 0
+key_to_int['-1'] = 0
 int_val = 1
 
 for key, album in song_list:
@@ -34,6 +35,7 @@ for key, album in song_list:
 	int_to_key.append(key)
 	int_val += 1
 
+print(key_to_int)
 partitioned_list = []
 lastAlbum = None
 count = -1
@@ -49,5 +51,4 @@ for key, album in song_list:
 		partitioned_list[count].append(key_to_int[key])
 		lastAlbum = album
 
-#print(partitioned_list)
 pickle.dump({'itk': int_to_key, 'kti': key_to_int, 'ixx': partitioned_list}, open('input.p', 'wb'))

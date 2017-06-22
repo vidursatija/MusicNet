@@ -55,7 +55,7 @@ class PredictModel():
 
 		#self.sess.run(tf.global_variables_initializer())
 
-	def predictNext(self, key_queue=[-1]):
+	def predictNext(self, key_queue=['-1']):
 		x_i = [self.key_to_int[key] for key in key_queue]
 		probs = self.sess.run(self.logits, feed_dict={self.inputXY: [x_i], self.input_len:len(x_i)})
 		top3 = probs[0].argsort()[-3:][::-1]

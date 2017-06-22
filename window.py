@@ -118,9 +118,8 @@ class MainWindow(QWidget):
 		self.iTunes = iTunes()
 		self.r_song = []
 
-		self.currentSongID = -1
+		self.currentSongID = '-1'
 		self.songAdded = False
-		
 
 		pickle_file = "itl.p"
 		self.itl = pickle.load(open(pickle_file, "rb"))
@@ -209,7 +208,8 @@ class MainWindow(QWidget):
 		self.iTunes.player_position = self.time_line.value()
 
 	def updateLabels(self):
-		DID = self.iTunes.current_track.database_id
+		song = self.iTunes.current_track
+		DID = "-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]])#self.iTunes.current_track.database_id
 		cTrackDuration = self.iTunes.current_track.duration
 		playerPosition = self.iTunes.player_position
 		self.time_line.setValue(playerPosition)
@@ -227,7 +227,7 @@ class MainWindow(QWidget):
 				if self.songAdded == False:
 					goodSong = True
 					try:
-						i = self.key_to_int[DID]
+						_ = self.key_to_int[DID]
 					except:
 						goodSong = False
 					if goodSong:
@@ -262,14 +262,15 @@ class MainWindow(QWidget):
 			except:
 				self.current_song.changeLabels(song_name=self.iTunes.current_track.name, song_artist=self.iTunes.current_track.artist)
 			self.currentSongID = DID
-			self.top3 = [-1, -1, -1]
-			if DID == 0:
-				self.top3 = self.pm.predictNext(self.song_queue+[-1])
+			self.top3 = ['-1', '-1', '-1']
+			if DID == '':
+				self.top3 = self.pm.predictNext(self.song_queue+['-1'])
 			else:
 				try:
 					self.top3 = self.pm.predictNext(self.song_queue+[DID, DID])
 				except:
 					print("Not a known song")
+					print(DID)
 			#print(self.top3)
 			#SEARCH NAME AND ALBUM AND ARTIST in itl
 			self.best_recommend = None

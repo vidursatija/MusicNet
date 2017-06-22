@@ -74,7 +74,7 @@ for id, song in itl.songs.items():
 		if song.kind[-10:] == 'audio file':
 			songPath = song.location
 			try:
-				song_dict[int(id)] = calculateFeatures(os.path.join('/', songPath))
+				song_dict["-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]])] = calculateFeatures(os.path.join('/', songPath))
 				count += 1
 			except Exception as e:
 				print("Booyeah!")
