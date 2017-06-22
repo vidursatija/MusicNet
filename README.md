@@ -3,6 +3,9 @@ Improved shuffle for iTunes
 
 ## Setup
 Open music_analyze.py and write the path of your iTunes XML directory
+```
+xmlPath = '/Users/<username>/Music/iTunes/iTunes Music Library.xml'
+```
 Install by:
 ```
 python3 music_analyze.py
