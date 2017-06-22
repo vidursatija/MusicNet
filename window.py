@@ -130,7 +130,7 @@ class MainWindow(QWidget):
 		self.song_changing = False
 
 		input_file = open(os.path.join("", 'input.p'), 'rb')
-		input_file_data = pickle.loads(input_file)
+		input_file_data = pickle.load(input_file)
 		self.int_to_key = input_file_data['itk']
 		self.key_to_int = input_file_data['kti']
 
