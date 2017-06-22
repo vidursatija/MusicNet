@@ -208,7 +208,7 @@ class MainWindow(QWidget):
 		if did_artist == "":
 			did_artist = "None"
 		DID = "-".join([did_name[:5], did_album[:5], did_artist[:5]])#self.iTunes.current_track.database_id
-		print(DID)
+		#print(DID)
 		cTrackDuration = self.iTunes.current_track.duration
 		playerPosition = self.iTunes.player_position
 		self.time_line.setValue(playerPosition)
@@ -281,13 +281,23 @@ class MainWindow(QWidget):
 					self.top3 = self.pm.predictNext(self.song_queue+[DID, DID])
 				else:
 					return
-			#print(self.top3)
+			print(self.top3)
 			#SEARCH NAME AND ALBUM AND ARTIST in itl
 			self.best_recommend = None
 			for index, top in enumerate(self.top3):
 				for id, song in self.itl.songs.items():
-					if top == "-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]]):
-						search_list = self.iTunes.search(name=str(song.name), album=str(song.album), artist=str(song.artist))
+					#print("-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]]))
+					s_name = str(song.name)
+					s_artist = str(song.artist)
+					s_album = str(song.album)
+					if top == "-".join([s_name[:5], s_album[:5], s_artist[:5]]):
+						if s_name == 'None':
+							s_name = ""
+						if s_artist == 'None':
+							s_artist = ""
+						if s_album == 'None':
+							s_album = ""
+						search_list = self.iTunes.search(name=s_name, album=s_album, artist=s_artist)
 						if len(search_list) == 0:
 							break
 						best_track = search_list[0]
