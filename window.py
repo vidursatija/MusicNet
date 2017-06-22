@@ -208,8 +208,8 @@ class MainWindow(QWidget):
 		self.iTunes.player_position = self.time_line.value()
 
 	def updateLabels(self):
-		song = self.iTunes.current_track
-		DID = "-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]])#self.iTunes.current_track.database_id
+		s = self.iTunes.current_track
+		DID = "-".join([str(s.name)[:5], str(s.album)[:5], str(s.artist)[:5]])#self.iTunes.current_track.database_id
 		cTrackDuration = self.iTunes.current_track.duration
 		playerPosition = self.iTunes.player_position
 		self.time_line.setValue(playerPosition)
@@ -255,22 +255,30 @@ class MainWindow(QWidget):
 		else:
 			self.time_line.setMaximum(cTrackDuration)
 			try:
-				art = self.iTunes.current_track.artworks[0].raw_data
+				art = s.artworks[0].raw_data
 				with open("".join(['songs_raw/', self.iTunes.current_track.name, '.raw']), 'wb') as f:
 					f.write(art)
-				self.current_song.changeLabels(song_name=self.iTunes.current_track.name, song_artist=self.iTunes.current_track.artist, song_loc="".join(['songs_raw/', self.iTunes.current_track.name, '.raw']))
+				self.current_song.changeLabels(song_name=s.name, song_artist=s.artist, song_loc="".join(['songs_raw/', s.name, '.raw']))
 			except:
-				self.current_song.changeLabels(song_name=self.iTunes.current_track.name, song_artist=self.iTunes.current_track.artist)
+				self.current_song.changeLabels(song_name=s.name, song_artist=s.artist)
+			
 			self.currentSongID = DID
 			self.top3 = ['-1', '-1', '-1']
 			if DID == '':
 				self.top3 = self.pm.predictNext(self.song_queue+['-1'])
 			else:
+				goodSong = True
 				try:
-					self.top3 = self.pm.predictNext(self.song_queue+[DID, DID])
-				except:
+					_ = self.key_to_int[DID]
+				except Exception as e:
+					print(e)
 					print("Not a known song")
 					print(DID)
+					goodSong = False
+			if goodSong:
+				self.top3 = self.pm.predictNext(self.song_queue+[DID, DID])
+			else:
+				return
 			#print(self.top3)
 			#SEARCH NAME AND ALBUM AND ARTIST in itl
 			self.best_recommend = None
