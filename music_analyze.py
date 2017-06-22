@@ -1,8 +1,6 @@
 from libpytunes import Library
 import librosa
 import numpy as np
-#import matplotlib.pyplot as plt
-#import time
 import pickle
 import os
 
@@ -55,7 +53,7 @@ def calculateFeatures(filename):
 	para_init_locs.sort()
 	#print(para_init_locs)
 
-	all_features = np.empty((n_paras*section_length, 2)) #0 - mfcc, 1...3 - chroma
+	all_features = np.empty((n_paras*section_length, 2)) #0 - mfcc, 1 - chroma
 	for n_p in range(n_paras):
 		all_features[n_p*section_length:(n_p+1)*section_length, 0] = beat_mfcc_delta[0][para_init_locs[n_p]:para_init_locs[n_p]+section_length] / 250
 		all_features[n_p*section_length:(n_p+1)*section_length, 1] = np.argmax(beat_chroma[:, para_init_locs[n_p]:para_init_locs[n_p]+section_length], axis=0)/11
@@ -74,10 +72,9 @@ count = 0
 for id, song in itl.songs.items():
 	if song and song.kind:
 		if song.kind[-10:] == 'audio file':
-			#songPath = '/Users/vidursatija/Music/iTunes/iTunes Media/Music/The 1975/The 1975/11 Girls.mp3'
 			songPath = song.location
 			try:
-				song_dict[str(id)] = calculateFeatures(os.path.join('/', songPath))
+				song_dict[int(id)] = calculateFeatures(os.path.join('/', songPath))
 				count += 1
 			except Exception as e:
 				print("Booyeah!")
@@ -85,10 +82,6 @@ for id, song in itl.songs.items():
 		print(count)
 
 print(count)
-pickle.dump(song_dict, open('songsf.p', 'wb'), protocol=2)
+pickle.dump(song_dict, open('songsf.p', 'wb'))
 
-
-#time1 = time.time()
-#time2 = time.time()
-#print(float(time2-time1))
 

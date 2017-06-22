@@ -129,6 +129,11 @@ class MainWindow(QWidget):
 		self.song_queue = []
 		self.song_changing = False
 
+		input_file = open(os.path.join("", 'input.p'), 'rb')
+		input_file_data = pickle.loads(input_file)
+		self.int_to_key = input_file_data['itk']
+		self.key_to_int = input_file_data['kti']
+
 		self.drawUI()
 
 	def drawUI(self):
@@ -220,14 +225,20 @@ class MainWindow(QWidget):
 		if DID == self.currentSongID:
 			if playerPosition >= 0.75 * cTrackDuration + 1:
 				if self.songAdded == False:
-					self.song_queue.append(DID)
-					self.songAdded = True
-					#print("Added")
-					if len(self.song_queue) > 10:
-						pickle.dump({"q": self.song_queue[-11:]}, open("update_queue.p", 'wb'), protocol=2)
-						if os.path.isfile("temp.train") == False:
-							print("Training start")
-							subprocess.run(['python3', 'update_model.py'])
+					goodSong = True
+					try:
+						i = self.key_to_int[DID]
+					except:
+						goodSong = False
+					if goodSong:
+						self.song_queue.append(DID)
+						self.songAdded = True
+
+						if len(self.song_queue) > 10:
+							pickle.dump({"q": self.song_queue[-11:]}, open("update_queue.p", 'wb'))
+							if os.path.isfile("temp.train") == False:
+								print("Training start")
+								subprocess.run(['python3', 'update_model.py'])
 			else:
 				self.songAdded = False
 

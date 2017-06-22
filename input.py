@@ -1,6 +1,5 @@
 import pickle
 import numpy as np
-from collections import defaultdict, Counter
 
 pickle_file = 'itl.p'
 itl = pickle.load(open(pickle_file, "rb"))
@@ -51,4 +50,4 @@ for key, album in song_list:
 		lastAlbum = album
 
 #print(partitioned_list)
-pickle.dump({'itk': int_to_key, 'kti': key_to_int, 'ixx': partitioned_list}, open('input.p', 'wb'), protocol=2)
+pickle.dump({'itk': int_to_key, 'kti': key_to_int, 'ixx': partitioned_list}, open('input.p', 'wb'))
