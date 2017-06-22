@@ -3,6 +3,13 @@
 This app recognizes your pattern of listening music using recurrent neural networks and generates better shuffle predictions.
 You have to run the app while iTunes is on.
 
+## Install Dependencies
+```
+pip install -r requirements.txt
+pip instal git+https://github.com/PhilipTrauner/iTunesConnector.git
+pip instal git+https://github.com/liamks/libpytunes.git
+```
+
 ## Setup
 Open music_analyze.py and update the path of your iTunes XML directory at line 67
 ```
@@ -22,11 +29,3 @@ For best performance ensure your iTunes library has sorted albums
 ```
 python3 window.py
 ```
-
-## Requirements
-1. tensorflow (requirements.txt)
-2. numpy (requirements.txt)
-3. iTunesConnector (https://github.com/PhilipTrauner/iTunesConnector)
-4. PyQt5 (requirements.txt)
-5. Librosa (requirements.txt)
-6. libpytunes (https://github.com/liamks/libpytunes)
