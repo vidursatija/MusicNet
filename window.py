@@ -133,7 +133,7 @@ class MainWindow(QWidget):
 		self.int_to_key = input_file_data['itk']
 		self.key_to_int = input_file_data['kti']
 
-		self.best_recommend == None
+		self.best_recommend = None
 
 		self.drawUI()
 
@@ -198,16 +198,17 @@ class MainWindow(QWidget):
 
 	def updateLabels(self):
 		s = self.iTunes.current_track
-		did_name = s.name
-		did_album = s.album
-		did_artist = s.artist
-		if s.name == "":
+		did_name = str(s.name)
+		did_album = str(s.album)
+		did_artist = str(s.artist)
+		if did_name == "":
 			did_name = "None"
-		if s.album == "":
+		if did_album == "":
 			did_album = "None"
-		if s.artist == "":
+		if did_artist == "":
 			did_artist = "None"
-		DID = "-".join([str(did_name)[:5], str(did_album)[:5], str(did_artist)[:5]])#self.iTunes.current_track.database_id
+		DID = "-".join([did_name[:5], did_album[:5], did_artist[:5]])#self.iTunes.current_track.database_id
+		print(DID)
 		cTrackDuration = self.iTunes.current_track.duration
 		playerPosition = self.iTunes.player_position
 		self.time_line.setValue(playerPosition)
