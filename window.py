@@ -276,7 +276,7 @@ class MainWindow(QWidget):
 			self.best_recommend = None
 			for index, top in enumerate(self.top3):
 				for id, song in self.itl.songs.items():
-					if top == id:
+					if top == "-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]]):
 						search_list = self.iTunes.search(name=str(song.name), album=str(song.album), artist=str(song.artist))
 						if len(search_list) == 0:
 							break
