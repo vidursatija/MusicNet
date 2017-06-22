@@ -209,7 +209,16 @@ class MainWindow(QWidget):
 
 	def updateLabels(self):
 		s = self.iTunes.current_track
-		DID = "-".join([str(s.name)[:5], str(s.album)[:5], str(s.artist)[:5]])#self.iTunes.current_track.database_id
+		did_name = s.name
+		did_album = s.album
+		did_artist = s.artist
+		if s.name = "":
+			did_name = "None"
+		if s.album = "":
+			did_album = "None"
+		if s.artist = "":
+			did_artist = "None"
+		DID = "-".join([did_name[:5], did_album[:5], did_artist[:5]])#self.iTunes.current_track.database_id
 		cTrackDuration = self.iTunes.current_track.duration
 		playerPosition = self.iTunes.player_position
 		self.time_line.setValue(playerPosition)
@@ -279,7 +288,7 @@ class MainWindow(QWidget):
 					self.top3 = self.pm.predictNext(self.song_queue+[DID, DID])
 				else:
 					return
-			print(self.top3)
+			#print(self.top3)
 			#SEARCH NAME AND ALBUM AND ARTIST in itl
 			self.best_recommend = None
 			for index, top in enumerate(self.top3):
