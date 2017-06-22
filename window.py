@@ -207,7 +207,7 @@ class MainWindow(QWidget):
 			did_album = "None"
 		if did_artist == "":
 			did_artist = "None"
-		DID = "-".join([did_name[:5], did_album[:5], did_artist[:5]])#self.iTunes.current_track.database_id
+		DID = "-".join([did_name[:5], did_album[:5], did_artist[:5], did_name[-5:], did_album[-5:]])#self.iTunes.current_track.database_id
 		#print(DID)
 		cTrackDuration = self.iTunes.current_track.duration
 		playerPosition = self.iTunes.player_position
@@ -275,22 +275,22 @@ class MainWindow(QWidget):
 				except Exception as e:
 					print(e)
 					print("Not a known song")
-					print(DID)
+					#print(DID)
 					goodSong = False
 				if goodSong:
 					self.top3 = self.pm.predictNext(self.song_queue+[DID, DID])
 				else:
 					return
-			print(self.top3)
+			#print(self.top3)
 			#SEARCH NAME AND ALBUM AND ARTIST in itl
 			self.best_recommend = None
 			for index, top in enumerate(self.top3):
 				for id, song in self.itl.songs.items():
-					#print("-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]]))
+
 					s_name = str(song.name)
 					s_artist = str(song.artist)
 					s_album = str(song.album)
-					if top == "-".join([s_name[:5], s_album[:5], s_artist[:5]]):
+					if top == "-".join([s_name[:5], s_album[:5], s_artist[:5], s_name[-5:], s_album[-5:]]):
 						if s_name == 'None':
 							s_name = ""
 						if s_artist == 'None':

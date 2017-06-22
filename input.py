@@ -14,7 +14,7 @@ for key, value in songf.items():
 	count = 0
 	while count < len(itl_song_values):
 		song = itl_song_values[count]
-		if "-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5]]) == key:
+		if "-".join([str(song.name)[:5], str(song.album)[:5], str(song.artist)[:5], str(song.name)[-5:], str(song.album)[-5:]]) == key:
 			song_list.append((key, str(song.album)))
 			count += 1
 			break
