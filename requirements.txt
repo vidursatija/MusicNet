@@ -1,0 +1,4 @@
+tensorflow
+numpy
+pyqt5
+librosa
