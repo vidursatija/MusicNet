@@ -237,7 +237,7 @@ class MainWindow(QWidget):
 							pickle.dump({"q": self.song_queue[-11:]}, open("update_queue.p", 'wb'))
 							if os.path.isfile("temp.train") == False:
 								print("Training start")
-								subprocess.run(['python3', 'update_model.py'])
+								subprocess.Popen(['python3', 'update_model.py'])		
 			else:
 				self.songAdded = False
 
