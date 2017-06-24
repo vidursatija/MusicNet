@@ -22,7 +22,7 @@ class UpdateModel():
 
 		self.hidden_size = 240
 		self.vocab_size = len(all_features) + 1
-		self.epoch = 10
+		self.epoch = 5
 		self.avg_err = 0.0
 		self.num_steps = 10
 
